@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HardCoreSMP • Resmi Tanıtım Sitesi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.5);
+            --accent: #3b82f6;
+            --bg-dark: #070b14;
+            --card-bg: rgba(15, 23, 42, 0.65);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18) 0%, transparent 60%),
+                linear-gradient(to bottom, rgba(7, 11, 20, 0.72), rgba(7, 11, 20, 0.96)),
+                url('arkaplan.jpg'),
+                url('https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=2074&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Üst Navigasyon */
+        nav {
+            width: 100%;
+            max-width: 1150px;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #34d399, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-version {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        /* Ana Hero Alanı */
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            max-width: 850px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+        }
+
+        .pulse-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #94a3b8;
+            position: relative;
+        }
+
+        .pulse-dot.online {
+            background: #10b981;
+            box-shadow: 0 0 12px #10b981;
+        }
+
+        .pulse-dot.online::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid #10b981;
+            animation: pulseRing 1.8s infinite;
+        }
+
+        .pulse-dot.offline {
+            background: #ef4444;
+            box-shadow: 0 0 12px #ef4444;
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* RGB Animasyonlu Ana Başlık */
+        h1 {
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #10b981, #38bdf8, #818cf8, #10b981);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbFlow 6s ease infinite;
+            filter: drop-shadow(0 8px 25px rgba(16, 185, 129, 0.25));
+        }
+
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 38px;
+            line-height: 1.6;
+        }
+
+        /* Aksiyon Butonu */
+        .cta-group {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-ip {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 38px;
+            border-radius: 16px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #022c22;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.35);
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-ip:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.55);
+        }
+
+        /* Simetrik 2'li Özellik Kartları */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            max-width: 820px;
+            width: 100%;
+            padding: 50px 25px;
+        }
+
+        @media (max-width: 720px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            padding: 34px 30px;
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981, #38bdf8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.45);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.65;
+            font-size: 0.96rem;
+        }
+
+        /* Kopyalandı Bildirimi (Toast) */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            background: #10b981;
+            color: #022c22;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 800;
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 999;
+        }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-brand" id="nav-title">HardCoreSMP</div>
+        <div class="nav-version" id="nav-version">Sürüm: 1.20.4 - 1.21</div>
+    </nav>
+
+    <header>
+        <div class="status-pill">
+            <span class="pulse-dot" id="status-dot"></span>
+            <span id="status-text">Sunucu durumu kontrol ediliyor...</span>
+        </div>
+
+        <h1 id="main-title">HardCoreSMP</h1>
+        <p class="subtitle">Gerçek hayatta kalma deneyimi, adil ekonomi sistemi ve kesintisiz macera. Ekibini topla, bölgene hükmet!</p>
+
+        <div class="cta-group">
+            <button class="btn-ip" onclick="copyIP()">
+                <span>📋</span>
+                <span id="ip-display">IP Yükleniyor...</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="grid-container">
+        <div class="feature-card">
+            <div class="card-icon">⚔️</div>
+            <h3>Dengeli Ekonomi</h3>
+            <p>Oyuncular arası ticaret, açık artırma ve adil piyasa sistemiyle emeğinin tam karşılığını al.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="card-icon">📜</div>
+            <h3>Adil Kurallar</h3>
+            <p>Hile, makro, bug kullanımı ve toksik davranışlar kesinlikle yasaktır. Tamamen saygılı ve temiz oyun ortamı.</p>
+        </div>
+    </section>
+
+    <div id="toast">✔ Sunucu IP Adresi Panoya Kopyalandı!</div>
+
+    <footer>
+        © 2026 <span id="footer-title">HardCoreSMP</span> • Tüm Hakları Saklıdır. (Mojang Studios ile bağlantılı değildir.)
+    </footer>
+
+    <script>
+        // ==========================================
+        // BURADAKİ 3 BİLGİYİ KENDİNE GÖRE DÜZENLE
+        // ==========================================
+        const AYARLAR = {
+            sunucuAdi: "HardCoreSMP",
+            ipAdresi: "HardCoreSMPnet.aternos.me",
+            surum: "26.2 • Emek SMP"
+        };
+        // ==========================================
+
+        document.title = AYARLAR.sunucuAdi + " • Resmi Tanıtım Sitesi";
+        document.getElementById("nav-title").innerText = AYARLAR.sunucuAdi;
+        document.getElementById("main-title").innerText = AYARLAR.sunucuAdi;
+        document.getElementById("footer-title").innerText = AYARLAR.sunucuAdi;
+        document.getElementById("nav-version").innerText = AYARLAR.surum;
+        document.getElementById("ip-display").innerText = AYARLAR.ipAdresi;
+
+        function copyIP() {
+            navigator.clipboard.writeText(AYARLAR.ipAdresi);
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2600);
+        }
+
+        // Canlı Sunucu Durumu Kontrolü
+        fetch(`https://api.mcsrvstat.us/3/${AYARLAR.ipAdresi}`)
+            .then(response => response.json())
+            .then(data => {
+                const dot = document.getElementById("status-dot");
+                const text = document.getElementById("status-text");
+                if (data.online) {
+                    dot.classList.add("online");
+                    text.innerText = `Sunucu Aktif • ${data.players.online} / ${data.players.max} Oyuncu`;
+                } else {
+                    dot.classList.add("offline");
+                    text.innerText = "Sunucu Şu An Kapalı";
+                }
+            })
+            .catch(() => {
+                document.getElementById("status-text").innerText = "Sunucu Durumu Alınamadı";
+            });
+    </script>
+</body>
+</html>
